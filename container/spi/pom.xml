@@ -22,7 +22,7 @@
 		</dependency>
 		
 		<dependency>
-			<groupId>javassist</groupId>
+			<groupId>org.javassist</groupId>
 			<artifactId>javassist</artifactId>
 		</dependency>		
 		
@@ -32,23 +32,23 @@
 		</dependency>
 		
 		<dependency>
-			<groupId>${pom.groupId}</groupId>
+			<groupId>${project.groupId}</groupId>
            	<artifactId>jmx-property-editors</artifactId>
-           	<version>${pom.version}</version>           	
+           	<version>${project.version}</version>
 		</dependency>
 		
 		<!-- 
 		<dependency>
-			<groupId>${pom.groupId}</groupId>
+			<groupId>${project.groupId}</groupId>
            	<artifactId>deployer</artifactId>
-           	<version>${pom.version}</version>           	
+           	<version>${project.version}</version>
 		</dependency>
 		 -->
 		 
 		<dependency>
-			<groupId>${pom.groupId}</groupId>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>fault-tolerant-ra-api</artifactId>
-			<version>${pom.version}</version>
+			<version>${project.version}</version>
 		</dependency>
 
         <dependency>
@@ -59,12 +59,13 @@
 		<dependency>
 			<groupId>trove</groupId>
 			<artifactId>trove</artifactId>			
-		</dependency>            
-            
-        <dependency>
-            <groupId>javax.resource</groupId>
-            <artifactId>connector</artifactId>
-        </dependency>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.resource</groupId>
+			<artifactId>javax.resource-api</artifactId>
+			<version>1.7.1</version>
+		</dependency>
 
         <!--
 		<dependency>

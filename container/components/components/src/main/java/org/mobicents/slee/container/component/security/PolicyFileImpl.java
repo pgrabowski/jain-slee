@@ -39,6 +39,7 @@ import java.io.InputStreamReader;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
+import java.net.SocketPermission;
 import java.net.URI;
 import java.net.URL;
 import java.security.AccessController;
@@ -67,12 +68,7 @@ import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
 
 import org.apache.log4j.Logger;
-import org.mobicents.slee.container.component.security.PermissionHolder;
-
 import sun.security.provider.PolicyParser;
-import sun.security.provider.PolicyParser.GrantEntry;
-import sun.security.provider.PolicyParser.PermissionEntry;
-import sun.security.util.SecurityConstants;
 
 /**
  * Start time:13:40:09 2009-04-13<br>
@@ -392,26 +388,26 @@ public class PolicyFileImpl extends org.mobicents.slee.container.component.secur
 				URL u = null;
 				Certificate[] c = null;
 				PolicyHolderEntry pe = new PolicyHolderEntry(new CodeSource(u, c));
-				pe.add(SecurityConstants.LOCAL_LISTEN_PERMISSION);
-				pe.add(new PropertyPermission("java.version", SecurityConstants.PROPERTY_READ_ACTION));
-				pe.add(new PropertyPermission("java.vendor", SecurityConstants.PROPERTY_READ_ACTION));
-				pe.add(new PropertyPermission("java.vendor.url", SecurityConstants.PROPERTY_READ_ACTION));
-				pe.add(new PropertyPermission("java.class.version", SecurityConstants.PROPERTY_READ_ACTION));
-				pe.add(new PropertyPermission("os.name", SecurityConstants.PROPERTY_READ_ACTION));
-				pe.add(new PropertyPermission("os.version", SecurityConstants.PROPERTY_READ_ACTION));
-				pe.add(new PropertyPermission("os.arch", SecurityConstants.PROPERTY_READ_ACTION));
-				pe.add(new PropertyPermission("file.separator", SecurityConstants.PROPERTY_READ_ACTION));
-				pe.add(new PropertyPermission("path.separator", SecurityConstants.PROPERTY_READ_ACTION));
-				pe.add(new PropertyPermission("line.separator", SecurityConstants.PROPERTY_READ_ACTION));
-				pe.add(new PropertyPermission("java.specification.version", SecurityConstants.PROPERTY_READ_ACTION));
-				pe.add(new PropertyPermission("java.specification.vendor", SecurityConstants.PROPERTY_READ_ACTION));
-				pe.add(new PropertyPermission("java.specification.name", SecurityConstants.PROPERTY_READ_ACTION));
-				pe.add(new PropertyPermission("java.vm.specification.version", SecurityConstants.PROPERTY_READ_ACTION));
-				pe.add(new PropertyPermission("java.vm.specification.vendor", SecurityConstants.PROPERTY_READ_ACTION));
-				pe.add(new PropertyPermission("java.vm.specification.name", SecurityConstants.PROPERTY_READ_ACTION));
-				pe.add(new PropertyPermission("java.vm.version", SecurityConstants.PROPERTY_READ_ACTION));
-				pe.add(new PropertyPermission("java.vm.vendor", SecurityConstants.PROPERTY_READ_ACTION));
-				pe.add(new PropertyPermission("java.vm.name", SecurityConstants.PROPERTY_READ_ACTION));
+				pe.add(new SocketPermission("localhost:0", "listen"));
+				pe.add(new PropertyPermission("java.version", "read"));
+				pe.add(new PropertyPermission("java.vendor", "read"));
+				pe.add(new PropertyPermission("java.vendor.url", "read"));
+				pe.add(new PropertyPermission("java.class.version", "read"));
+				pe.add(new PropertyPermission("os.name", "read"));
+				pe.add(new PropertyPermission("os.version", "read"));
+				pe.add(new PropertyPermission("os.arch", "read"));
+				pe.add(new PropertyPermission("file.separator", "read"));
+				pe.add(new PropertyPermission("path.separator", "read"));
+				pe.add(new PropertyPermission("line.separator", "read"));
+				pe.add(new PropertyPermission("java.specification.version", "read"));
+				pe.add(new PropertyPermission("java.specification.vendor", "read"));
+				pe.add(new PropertyPermission("java.specification.name", "read"));
+				pe.add(new PropertyPermission("java.vm.specification.version", "read"));
+				pe.add(new PropertyPermission("java.vm.specification.vendor", "read"));
+				pe.add(new PropertyPermission("java.vm.specification.name", "read"));
+				pe.add(new PropertyPermission("java.vm.version", "read"));
+				pe.add(new PropertyPermission("java.vm.vendor", "read"));
+				pe.add(new PropertyPermission("java.vm.name", "read"));
 
 				// No need to sync because noone has access to newInfo yet
 				newGlobalPolicyHolder.policyHolderEntries.add(pe);
@@ -473,7 +469,7 @@ public class PolicyFileImpl extends org.mobicents.slee.container.component.secur
 		return true;
 	}
 
-	private void parseGrantEntry(GrantEntry nextElement, KeyStore ks, GlobalPolicyHolder newGlobalPolicyHolder) {
+	private void parseGrantEntry(PolicyParser.GrantEntry nextElement, KeyStore ks, GlobalPolicyHolder newGlobalPolicyHolder) {
 
 		try {
 			CodeSource cs = getCodeSource(nextElement, ks);
@@ -527,7 +523,7 @@ public class PolicyFileImpl extends org.mobicents.slee.container.component.secur
 
 	}
 
-	private void parseGrantEntry(GrantEntry nextElement, KeyStore ks, PermissionHolderImpl permissionHolder) {
+	private void parseGrantEntry(PolicyParser.GrantEntry nextElement, KeyStore ks, PermissionHolderImpl permissionHolder) {
 
 		try {
 			// System.err.println("PARSING GRANT ENTRY: "+permissionHolder);
@@ -582,7 +578,7 @@ public class PolicyFileImpl extends org.mobicents.slee.container.component.secur
 		}
 	}
 
-	private Permission getPermission(PermissionEntry entry) throws ClassNotFoundException, SecurityException, NoSuchMethodException, IllegalArgumentException, InstantiationException,
+	private Permission getPermission(PolicyParser.PermissionEntry entry) throws ClassNotFoundException, SecurityException, NoSuchMethodException, IllegalArgumentException, InstantiationException,
 			IllegalAccessException, InvocationTargetException {
 
 		Class permissionClass = Class.forName(entry.permission);
@@ -625,7 +621,7 @@ public class PolicyFileImpl extends org.mobicents.slee.container.component.secur
 
 	}
 
-	private CodeSource getCodeSource(GrantEntry nextElement, KeyStore ks) throws MalformedURLException {
+	private CodeSource getCodeSource(PolicyParser.GrantEntry nextElement, KeyStore ks) throws MalformedURLException {
 
 		Certificate[] certs = null;
 		if (nextElement.signedBy != null) {

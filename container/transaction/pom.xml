@@ -13,9 +13,9 @@
 	<dependencies>
 
 		<dependency>
-			<groupId>${pom.groupId}</groupId>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>common</artifactId>
-			<version>${pom.version}</version>
+			<version>${project.version}</version>
 		</dependency>
 
 		<!-- tests
@@ -42,26 +42,5 @@
 
 	<build>
 		<finalName>mobicents-slee-core-transaction</finalName>
-		<plugins>
-			<plugin>
-				<artifactId>maven-eclipse-plugin</artifactId>
-				<groupId>org.mobicents.tools</groupId>
-				<inherited>false</inherited>
-				<executions />
-				<configuration>
-					<excludePoms />
-					<classpathExcludes>
-						<exclude>xml-apis:xml-apis</exclude>
-						<exclude>jtidy:jtidy</exclude>						
-					</classpathExcludes>
-					<resolveTransitiveDependencies>
-						true
-					</resolveTransitiveDependencies>
-					<eclipseProjectName>
-						mobicents-slee-core-transaction
-					</eclipseProjectName>
-				</configuration>
-			</plugin>
-		</plugins>
 	</build>
 </project>

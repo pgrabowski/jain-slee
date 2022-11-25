@@ -1,52 +1,109 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	
-	<parent>
-		<groupId>org.mobicents</groupId>
-		<artifactId>mobicents-parent</artifactId>
-		<version>2.23</version>
-	</parent>
-	
 	<groupId>org.mobicents.servers.jainslee.core</groupId>
 	<artifactId>mobicents-slee-core</artifactId>
 	<version>3.0.0-SNAPSHOT</version>
 			
 	<packaging>pom</packaging>
-	
+
+	<properties>
+		<maven.compiler.source>11</maven.compiler.source>
+		<maven.compiler.target>11</maven.compiler.target>
+	</properties>
+
 	<modules>
+		<module>api/jar</module>
 		<module>api/extensions</module>
 		<module>container</module>			
 	</modules>
-		
-	<scm>
-		<connection>scm:git:https://code.google.com/p/jain-slee/</connection>
-		<developerConnection>scm:git:https://code.google.com/p/jain-slee/</developerConnection>
-		<url>https://code.google.com/p/jain-slee/</url>
-	</scm>     
-			
-	
-	
-	<!-- dupe info from parent, but it's only way to retrieve the parent without checkout -->
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>javax.slee</groupId>
+				<artifactId>jain-slee</artifactId>
+				<version>1.1-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>4.13.2</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>commons-pool</groupId>
+				<artifactId>commons-pool</artifactId>
+				<version>1.4</version>
+			</dependency>
+			<dependency>
+				<groupId>org.javassist</groupId>
+				<artifactId>javassist</artifactId>
+				<version>3.28.0-GA</version>
+			</dependency>
+			<dependency>
+				<groupId>jgroups</groupId>
+				<artifactId>jgroups</artifactId>
+				<version>2.6.10.GA</version>
+			</dependency>
+			<dependency>
+				<groupId>org.jboss.cache</groupId>
+				<artifactId>jbosscache-core</artifactId>
+				<version>3.2.11.GA</version>
+			</dependency>
+			<dependency>
+				<groupId>javax.xml</groupId>
+				<artifactId>jaxb-impl</artifactId>
+				<version>2.1</version>
+			</dependency>
+			<dependency>
+				<groupId>javax.xml.bind</groupId>
+				<artifactId>jaxb-api</artifactId>
+				<version>2.3.1</version>
+			</dependency>
+			<dependency>
+				<groupId>javax.resource</groupId>
+				<artifactId>javax.resource-api</artifactId>
+				<version>1.7.1</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.1</version>
+				<configuration>
+					<compilerArgs>
+						<arg>--add-exports</arg>
+						<arg>java.base/sun.security.provider=ALL-UNNAMED</arg>
+					</compilerArgs>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+		<!-- com.XXX.javax.rmi -->
+		<dependency>
+			<groupId>org.jboss.spec.javax.rmi</groupId>
+			<artifactId>jboss-rmi-api_1.0_spec</artifactId>
+			<version>1.0.6.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.spec.javax.rmi</groupId>
+			<artifactId>jboss-rmi-api_1.0_spec</artifactId>
+			<version>1.0.6.Final</version>
+			<classifier>sources</classifier>
+		</dependency>
+	</dependencies>
 
 	<repositories>
-                <repository>
-                        <id>mobicents-public-repository-group</id>
-                        <name>Mobicents Public Maven Repository Group</name>
-                        <url>https://oss.sonatype.org/content/groups/public</url>
-                        <layout>default</layout>
-                        <releases>
-                                <enabled>true</enabled>
-                                <updatePolicy>never</updatePolicy>
-                        </releases>
-                        <snapshots>
-                                <enabled>true</enabled>
-                                <updatePolicy>never</updatePolicy>
-                        </snapshots>
-                </repository>
-                <repository>
-				    <id>java.net</id>
-				    <url>http://download.java.net/maven/2/</url>
-				</repository>
-        </repositories>
-	
+		<repository>
+			<id>redhat-ga</id>
+			<url>https://maven.repository.redhat.com/ga/</url>
+		</repository>
+	</repositories>
 </project>

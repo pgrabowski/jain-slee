@@ -18,7 +18,7 @@
 		<jboss.jboss-serialization.version>${jboss-serialization.version}</jboss.jboss-serialization.version>
 		<trove.trove.version>${trove.version}</trove.trove.version>
 		<jgroups.jgroups.version>2.6.10.GA</jgroups.jgroups.version>
-		<org.jboss.cache.jbosscache-core.version>3.1.0.GA</org.jboss.cache.jbosscache-core.version>
+		<org.jboss.cache.jbosscache-core.version>3.2.11.GA</org.jboss.cache.jbosscache-core.version>
 		<org.mobicents.cluster.cache.version>${mobicents.cluster.version}</org.mobicents.cluster.cache.version>
 		<org.mobicents.cluster.core.version>${mobicents.cluster.version}</org.mobicents.cluster.core.version>
 		<org.mobicents.cluster.timers.version>${mobicents.cluster.version}</org.mobicents.cluster.timers.version>

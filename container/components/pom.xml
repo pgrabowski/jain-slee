@@ -19,22 +19,5 @@
 		<module>test-du</module>
 		-->		
 	</modules>
-	
-	<build>
-		<plugins>
-			<plugin>
-				<artifactId>maven-eclipse-plugin</artifactId>
-   				<groupId>org.mobicents.tools</groupId>
-				<inherited>false</inherited>
-				<executions />
-				<configuration>
-					<excludePoms />
-					<classpathExcludes />
-					<resolveTransitiveDependencies>true</resolveTransitiveDependencies>
-					<eclipseProjectName>mobicents-slee-core-components</eclipseProjectName>
-				</configuration>
-			</plugin>
-		</plugins>		
-	</build>
 
 </project>

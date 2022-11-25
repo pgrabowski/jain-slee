@@ -5,7 +5,6 @@
 		<groupId>org.mobicents.servers.jainslee.core</groupId>
 		<artifactId>mobicents-slee-core</artifactId>
 		<version>3.0.0-SNAPSHOT</version>
-		<relativePath>..</relativePath>
 	</parent>
 
 	<artifactId>mobicents-slee-core-container</artifactId>
@@ -15,11 +14,11 @@
 	<properties>
 		<slee.name>Mobicents JAIN SLEE</slee.name>
 		<slee.vendor>Mobicents</slee.vendor>
-		<slee.version>${pom.version}</slee.version>
+		<slee.version>${project.version}</slee.version>
 		<slee.codename>???</slee.codename>
 		<!-- OTHER MOBICENTS COMPONENTS VERSIONS -->
 		<mobicents.cluster.version>1.13.1.FINAL</mobicents.cluster.version>
-		<jboss-serialization.version>1.0.3.GA</jboss-serialization.version>
+		<jboss-serialization.version>4.2.2.GA</jboss-serialization.version>
 		<trove.version>1.0.2</trove.version>
 		<jain-slee-11-ext.version>${project.version}</jain-slee-11-ext.version>
 	</properties>
@@ -48,7 +47,7 @@
 			<dependency>
 				<groupId>jboss</groupId>
 				<artifactId>jboss-serialization</artifactId>
-				<version>${jboss-serialization.version}</version>	
+				<version>${jboss-serialization.version}</version>
 			</dependency>		
 			<dependency>
 				<groupId>trove</groupId>
@@ -77,8 +76,7 @@
 			</dependency>
 			<dependency>
             	<groupId>javax.resource</groupId>
-            	<artifactId>connector</artifactId>
-            	<version>1.0</version>
+            	<artifactId>javax.resource-api</artifactId>
         	</dependency>
 		</dependencies>
 	</dependencyManagement>
@@ -96,33 +94,7 @@
 				<module>docs</module>
 			</modules>			
 		</profile>
-		<profile>
-			<id>telscale</id>
-			<properties>
-				<slee.name>Telscale JAIN SLEE</slee.name>
-				<slee.vendor>Telestax</slee.vendor>
-			</properties>			
-		</profile>		
 	</profiles>
 
-	<build>
-		<plugins>
-			<plugin>
-				<artifactId>maven-eclipse-plugin</artifactId>
-				<groupId>org.mobicents.tools</groupId>
-				<inherited>false</inherited>
-				<executions />
-				<configuration>
-					<excludePoms />
-					<classpathExcludes>
-						<exclude>xml-apis:xml-apis</exclude>
-						<exclude>jtidy:jtidy</exclude>
-					</classpathExcludes>
-					<resolveTransitiveDependencies>true</resolveTransitiveDependencies>
-					<eclipseProjectName>slee-core-container</eclipseProjectName>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
 
 </project>
